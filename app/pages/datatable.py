@@ -16,7 +16,7 @@ class DataTable(Page):
 
         num_records = filter_table_option()
 
-        fig = px.line(self.data["base"].head(num_records), x="datetime", y="values")
-        st.plotly_chart(fig, use_container_width=True)
+        # fig = px.line(self.data["base"].head(num_records), x="datetime", y="values")
+        # st.plotly_chart(fig, use_container_width=True)
 
-        st.table(self.data["base"].head(num_records))
+        st.table(self.data['base'].head(num_records))

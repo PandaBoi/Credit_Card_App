@@ -8,6 +8,7 @@
 import numpy as np
 from numpy.linalg import norm
 import os
+import pandas as pd
 
 class SuggestionModel():
   def __init__(self, model_path=None, data_path=None, top_k=10,metric='l2'):

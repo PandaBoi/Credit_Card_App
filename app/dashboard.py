@@ -23,10 +23,7 @@ st.set_page_config(
 def fake_data():
     """some fake data"""
 
-    dt = pd.date_range("2021-01-01", "2021-03-01")
-    df = pd.DataFrame(
-        {"datetime": dt, "values": np.random.randint(0, 10, size=len(dt))}
-    )
+    df = pd.read_csv("data/cleaner_cred_score_classificaiton.csv")
 
     return df
 
