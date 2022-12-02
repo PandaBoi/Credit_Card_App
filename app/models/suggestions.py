@@ -32,22 +32,22 @@ class SuggestionModel():
   def _filter_users(self, fixed_attribs):
     selected_data = self.data[self.data['Credit_Score']=='Good']
     for attrib, val in fixed_attribs.items():
-      if selected_data is None:
-        selected_data = self.data[self.data[attrib] == val]
-      else:
-        selected_data = selected_data[selected_data[attrib] == val]
+        if selected_data is None:
+            selected_data = self.data[self.data[attrib] == val]
+        else:
+            selected_data = selected_data[selected_data[attrib] == val]
 
     return selected_data
 
   def _get_topk_cands(self, inpt):
-    topk = pd.DataFrame(columns=self.data.columns)
+
     filtered_cands = self._filter_users(fixed_attribs={
-        'Age': inpt['Age'],
-        inpt['Occupation']: 1
+        'Age': inpt['age'].values[0],
+        inpt['occupation'].values[0]: 1
     })
     
-    cand_vecs = filtered_cands.drop(columns=['prox_score','Credit_Score'],errors='ignore')
-    inp_vec = inpt.drop(index=['prox_score','Credit_Score','Occupation'],errors='ignore')
+    cand_vecs = filtered_cands.drop(columns=['prox_score','credit_score'],errors='ignore')
+    inp_vec = inpt.drop(index=['prox_score','credit_score','occupation'],errors='ignore')
     if inp_vec.ndim <2:
       inp_vec = inp_vec[None,:]
     
