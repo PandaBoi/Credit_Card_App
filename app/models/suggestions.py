@@ -26,6 +26,8 @@ class SuggestionModel():
   def _load_data(self):
     if self.data_path and os.path.exists(self.data_path):
       self.data = pd.read_csv(self.data_path)
+    else:
+        raise EOFError("cannot load data")
 
   def _filter_users(self, fixed_attribs):
     selected_data = self.data[self.data['Credit_Score']=='Good']
@@ -46,7 +48,6 @@ class SuggestionModel():
     
     cand_vecs = filtered_cands.drop(columns=['prox_score','Credit_Score'],errors='ignore')
     inp_vec = inpt.drop(index=['prox_score','Credit_Score','Occupation'],errors='ignore')
-    print(inp_vec)
     if inp_vec.ndim <2:
       inp_vec = inp_vec[None,:]
     
@@ -65,14 +66,16 @@ class SuggestionModel():
 
   def _load_data(self):
     if os.path.exists(self.data_path):
-      self.data = pd.read_csv(self.data_path)
+        self.data = pd.read_csv(self.data_path)
+    else:
+        raise
 
   def get_suggestions(self, inpt):
 
     topk_cands = self._get_topk_cands(inpt)
     float_cols = topk_cands.select_dtypes(include=[float]).mean(axis=0)
     cat_cols = topk_cands.select_dtypes(include=[int])
-
+    
     float_suggestions = float_cols.to_dict()
 
     return float_suggestions

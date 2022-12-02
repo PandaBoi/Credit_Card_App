@@ -8,6 +8,7 @@ from loguru import logger
 from pages.first_page import Input_data
 from pages.about import About
 from pages.datatable import DataTable
+from pages.suggestions import Suggestions
 from utils.sidebar import sidebar_caption
 
 # Config the whole app
@@ -36,7 +37,8 @@ def main():
     PAGES = {
         "Table": DataTable,
         "About": About,
-        "Mainpage": Input_data
+        "Mainpage": Input_data,
+        "Suggestions": Suggestions
     }
 
     # Select pages
