@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 from loguru import logger
-
+from pages.first_page import Input_data
 from pages.about import About
 from pages.datatable import DataTable
 from utils.sidebar import sidebar_caption
@@ -35,7 +35,8 @@ def main():
 
     PAGES = {
         "Table": DataTable,
-        "About": About
+        "About": About,
+        "Mainpage": Input_data
     }
 
     # Select pages
