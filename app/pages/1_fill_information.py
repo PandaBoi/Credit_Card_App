@@ -28,6 +28,7 @@ class Input_data(Page):
             'credit_score': 0
         }
         st.session_state.update(inputs)
+        
         st.number_input("Age", min_value = 0, max_value = 100, step = 1, key = "age")
         st.number_input("Annual Income", min_value = 0, max_value = 10000000, step = None, key = 'income')
         st.number_input("Number of Bank Accounts", min_value = 0, max_value = 100, step = 1, key = 'bank_accounts')
