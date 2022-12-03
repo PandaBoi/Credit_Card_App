@@ -30,11 +30,19 @@ class CreditCardApp(Page):
         
     def content(self):
         st.header("This is my page content")
+        st.write('cleaning data')
+        testPage.cleanData()
+        st.write('about to convert data')
+        testPage.convertData()
+        st.write('requesting inputs')
+        #testPage.buildModel()
+        testPage.inputs()
     
     #def defineVariables(self):
         
     
     def inputs(self):
+        print('starting inputs')
         st.header('Inputs')
         st.write('session state age', st.session_state['Age'])
         st.write('session state debt', st.session_state['Outstanding_Debt'])
@@ -143,11 +151,11 @@ class CreditCardApp(Page):
 
     def buildModel(self):
         tempData = self.data
-        xData = tempData.drop(labels=["Approval Status"], axis=1)
-        yData = tempData["Approval Status"].to_frame()
+        #xData = tempData.drop(labels=["Approval Status"], axis=1)
+        #yData = tempData["Approval Status"].to_frame()
 
         tempData.drop(tempData.tail(1).index, inplace=True)
-        yData.drop(yData.tail(1).index, inplace=True)
+        #yData.drop(yData.tail(1).index, inplace=True)
         cat_cols = ['Age', 'Debt', 'Prior Default',
                     'Employed', 'Credit Score', 'Income']
         print('before settings')
@@ -189,11 +197,13 @@ class CreditCardApp(Page):
     
 testPage = CreditCardApp(data, test='testing')
 
-testPage.title()
-testPage.content()
-testPage.cleanData()
-testPage.convertData()
+#testPage.title()
+#testPage.content()
+#testPage.cleanData()
+#testPage.convertData()
 #testPage.buildModel()
-testPage.inputs()
+#testPage.inputs()
 #applicationModel = testPage.buildModel()
 #testPage.predict()
+#if __name__ == '__main__':
+testPage()
