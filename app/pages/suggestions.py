@@ -5,6 +5,30 @@ from models.suggestions import SuggestionModel
 from millify import millify
 import matplotlib.pyplot as plt
 import numpy as np
+
+
+st.markdown("""
+<style>
+div[data-testid="metric-container"] {
+   background-color: rgba(172, 56, 190, 0.61);
+   border: 1px solid rgba(28, 131, 225, 0.1);
+   padding: 5% 5% 5% 10%;
+   border-radius: 5px;
+   color: white;
+   overflow-wrap: break-word;
+}
+
+/* breakline for metric text         */
+div[data-testid="metric-container"] > label[data-testid="stMetricLabel"] > div {
+   overflow-wrap: break-word;
+   white-space: break-spaces;
+   font-size: 10000px;
+   color: rgba(247, 255, 10, 0.9);
+   
+}
+</style>
+"""
+, unsafe_allow_html=True)
 class Suggestions(Page):
     def __init__(self, **kwargs):
         self.kwargs = kwargs
