@@ -42,12 +42,14 @@ class SuggestionModel():
   def _get_topk_cands(self, inpt):
 
     filtered_cands = self._filter_users(fixed_attribs={
-        'Age': inpt['age'].values[0],
-        inpt['occupation'].values[0]: 1
+        'Age': inpt['Age'].values[0],
+        inpt['Occupation'].values[0]: 1
     })
+    print("inpt",inpt.columns)
+    inp_vec = inpt.drop(columns=['Credit_Score','Occupation','disabled','prior_default','visibility','employed'])
+    print(inp_vec.columns)
+    cand_vecs = filtered_cands[list(inp_vec.columns)]
     
-    cand_vecs = filtered_cands.drop(columns=['prox_score','credit_score'],errors='ignore')
-    inp_vec = inpt.drop(index=['prox_score','credit_score','occupation'],errors='ignore')
     if inp_vec.ndim <2:
       inp_vec = inp_vec[None,:]
     
@@ -73,9 +75,9 @@ class SuggestionModel():
   def get_suggestions(self, inpt):
 
     topk_cands = self._get_topk_cands(inpt)
+    topk_cands = topk_cands[[col for col in topk_cands.columns if col in inpt.columns]]
     float_cols = topk_cands.select_dtypes(include=[float]).mean(axis=0)
     cat_cols = topk_cands.select_dtypes(include=[int])
-    
     float_suggestions = float_cols.to_dict()
 
     return float_suggestions
