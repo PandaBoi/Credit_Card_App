@@ -57,7 +57,7 @@ class creditScore(Page):
 
         # Initialize the structured data classifier.
         clf = autokeras.StructuredDataClassifier(
-            max_trials=5, # We will do 10 iterations of model improvement
+            max_trials=2, # We will do 10 iterations of model improvement
             overwrite=True, # Overwrite prior training attempts
         ) 
 
