@@ -32,21 +32,7 @@ class creditScore(Page):
 
     def input(self):
 
-        # """Returns a text input"""
-        # self.occupation= st.text_input(label = "Occupation")
-        # self.age = st.text_input(label = "Age", value="0")
-        # self.annualIncome = st.text_input(label = "Annual Income", value="0")
-        # self.numBankAcc= st.text_input(label = "Number of Bank Accounts", value="0")
-        # self.numCreditCards = st.text_input(label = "Number of Credit Cards", value="0")
-        # self.numDelPay = st.text_input(label = "Number of Delayed Payments", value="0")
-        # self.inquiries = st.text_input(label = "Number of Credit Inquiries", value="0")
-        # self.debt = st.text_input(label = "Outstanding Debt", value="0")
-        # self.history = st.text_input(label = "Days with credit", value="0")
-        # self.student = st.text_input(label = "Student", value="0")
-        # self.inputValues = [self.occupation, self.age, self.annualIncome, self.numBankAcc, self.numCreditCards,
-        #                     self.numDelPay, self.inquiries, self.debt, self.history, self.student]
         pt = pd.DataFrame({k:[v] for k,v in st.session_state.items()})
-        print('LOOK HERE')
 
         self.occupation = pt['Occupation'][0]
         self.age = pt['Age'][0]
@@ -59,9 +45,6 @@ class creditScore(Page):
         self.history = pt["Credit_History_Age"][0]
         self.inputValues = [self.occupation, self.age, self.annualIncome, self.numBankAcc, self.numCreditCards,
                             self.numDelPay, self.inquiries, self.debt, self.history]
-
-        print(self.inputValues)
-
 
         self.buttonPressed = st.button("Calculate Score")
         
