@@ -24,7 +24,7 @@ class creditScore(Page):
 
     def content(self):
         
-        st.markdown("This is my about page.")
+        st.markdown("Credit Score Prediction")
 
     def title(self):
         """Returns the title of the page"""
