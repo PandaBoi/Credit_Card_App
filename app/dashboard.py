@@ -24,6 +24,22 @@ from loguru import logger
 
 st.session_state.update(st.session_state)
 
+inputs = {
+            'Age': 23,
+            'Annual_Income': 50000,
+            'Num_Bank_Accounts': 1,
+            'Num_Credit_Card': 1,
+            'Num_of_Delayed_Payment': 1,
+            'Num_Credit_Inquiries': 1,
+            'Outstanding_Debt': 5000,
+            'Credit_History_Age': 200,
+            'Occupation': 'Scientist',
+            'prior_default': False,
+            'employed': False,
+            'Credit_Score': 0
+        }
+st.session_state.update(inputs)
+
 if "visibility" not in st.session_state:
     st.session_state.visibility = "visible"
     st.session_state.disabled = False
