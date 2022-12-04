@@ -31,7 +31,8 @@ class creditScore(Page):
         st.header(f"{self.name}")
 
     def input(self):
-
+        
+        st.header('Inputs')
         pt = pd.DataFrame({k:[v] for k,v in st.session_state.items()})
 
         self.occupation = pt['Occupation'][0]
@@ -45,7 +46,9 @@ class creditScore(Page):
         self.history = pt["Credit_History_Age"][0]
         self.inputValues = [self.occupation, self.age, self.annualIncome, self.numBankAcc, self.numCreditCards,
                             self.numDelPay, self.inquiries, self.debt, self.history]
-
+        pt = pt.transpose()
+        st.table(pt)
+        
         self.buttonPressed = st.button("Calculate Score")
         
     @st.cache(suppress_st_warning=True)
@@ -57,7 +60,7 @@ class creditScore(Page):
 
         # Initialize the structured data classifier.
         clf = autokeras.StructuredDataClassifier(
-            max_trials=2, # We will do 10 iterations of model improvement
+            max_trials=1, # We will do 10 iterations of model improvement
             overwrite=True, # Overwrite prior training attempts
         ) 
 
