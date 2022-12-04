@@ -36,7 +36,7 @@ class creditScore(Page):
 
         self.occupation = pt['Occupation'][0]
         self.age = pt['Age'][0]
-        self.annualIncome = pt['Annual_Income']
+        self.annualIncome = pt['Annual_Income'][0]
         self.numBankAcc = pt["Num_Bank_Accounts"][0]
         self.numCreditCards = pt['Num_Credit_Card'][0]
         self.numDelPay = pt["Num_of_Delayed_Payment"][0]
