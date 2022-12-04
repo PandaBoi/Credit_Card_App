@@ -38,6 +38,7 @@ inputs = {
             'employed': False,
             'Credit_Score': 0
         }
+
 st.session_state.update(inputs)
 
 if "visibility" not in st.session_state:
@@ -58,27 +59,6 @@ def main():
 
     st.sidebar.title("Welcome to our page")
 
-    # PAGES = {
-    #     "Table": DataTable,
-    #     "About": About,
-    #     "Mainpage": Input_data,
-    #     "Suggestions": Suggestions
-    # }
-
-    # # Select pages
-    # # Use dropdown if you prefer
-    # selection = st.sidebar.radio("Pages", list(PAGES.keys()))
-    # sidebar_caption()
-
-    # page = PAGES[selection]
-
-    # DATA = {"base": fake_data()}
-
-    # with st.spinner(f"Loading Page {selection} ..."):
-    #     try:
-    #         page(DATA)
-    #     except:
-    #         page()
 
 
 if __name__ == "__main__":
