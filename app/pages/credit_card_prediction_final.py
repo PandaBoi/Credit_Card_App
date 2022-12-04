@@ -30,11 +30,11 @@ class CreditCardApp(Page):
         
     def content(self):
         st.header("This is my page content")
-        st.write('cleaning data')
+        #st.write('cleaning data')
         testPage.cleanData()
-        st.write('about to convert data')
+        #st.write('about to convert data')
         testPage.convertData()
-        st.write('requesting inputs')
+        #st.write('requesting inputs')
         #testPage.buildModel()
         testPage.inputs()
     
@@ -44,12 +44,16 @@ class CreditCardApp(Page):
     def inputs(self):
         print('starting inputs')
         st.header('Inputs')
-        st.write('session state age', st.session_state['Age'])
-        st.write('session state debt', st.session_state['Outstanding_Debt'])
-        st.write('session state prior default', st.session_state['prior_default'])
-        st.write('session state employed', st.session_state['employed'])
-        st.write('session state credit score', st.session_state['Credit_Score'])
-        st.write('session state income', st.session_state['Annual_Income'])
+        st.header('Inputs')
+        st.markdown('If the inputs are wrong, please go back to the fill information page')
+        col11, col12, col13 = st.columns(3)
+        col21, col22, col23 = st.columns(3)
+        col11.metric('Age', st.session_state['Age'])
+        col12.metric('Debt', st.session_state['Outstanding_Debt'])
+        col13.metric('Have you previously been defaulted?', st.session_state['prior_default'])
+        col21.metric('Are you employed?', st.session_state['employed'])
+        col22.metric('Credit Score', st.session_state['Credit_Score'])
+        col23.metric('Income', st.session_state['Annual_Income'])
         pt = pd.DataFrame({k:[v] for k,v in st.session_state.items()})
         #print('credit score', pt['Credit_Score'])
         #st.write(pt)
@@ -190,9 +194,10 @@ class CreditCardApp(Page):
         #prediction = predict_model(applicationModel, testData)
         if outcome < 0.5:
             out = 'Not Approved'
+            st.header('You are unlikely to be approved. Check suggestions page for recommendations')
         elif outcome >= 0.5:
-            out = 'Approved'    
-        st.text_area('Application Prediction', out)
+            out = 'Approved'   
+            st.header('Congratulations! You are likely to be approved!')
     
     
 testPage = CreditCardApp(data, test='testing')
