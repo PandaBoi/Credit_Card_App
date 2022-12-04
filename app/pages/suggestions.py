@@ -6,6 +6,7 @@ from millify import millify
 import matplotlib.pyplot as plt
 import numpy as np
 
+st.session_state.update(st.session_state)
 
 st.markdown("""
 <style>

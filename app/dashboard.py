@@ -22,6 +22,7 @@ from loguru import logger
 
 # Config the whole app
 
+st.session_state.update(st.session_state)
 
 if "visibility" not in st.session_state:
     st.session_state.visibility = "visible"

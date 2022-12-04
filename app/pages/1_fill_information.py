@@ -1,5 +1,6 @@
 import streamlit as st 
 from utils.page import Page
+st.session_state.update(st.session_state)
 
 class Input_data(Page):
     def __init__(self, **kwargs):
