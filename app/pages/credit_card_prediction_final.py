@@ -10,7 +10,7 @@ import os
 import math
 import pycaret
 from pycaret.regression import *
-
+st.session_state.update(st.session_state)
 data = pd.read_csv('data/crx.data', header = None)
 #pressed = False
 class CreditCardApp(Page):
