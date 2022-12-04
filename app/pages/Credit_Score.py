@@ -10,7 +10,8 @@ import pandas as pd
 import gradio as gr
 import math
 
-data = pd.read_csv(r"C:\Users\mtnag\Documents\CMU\AI_ML\Project2\cleaner_cred_score_classifier.csv")
+data = pd.read_csv("data/cleaner_cred_score_classifier")
+data = data.drop_duplicates(subset="Customer_ID", keep = 'first', inplace=False)
 
 st.session_state.update(st.session_state)
 class creditScore(Page):
@@ -21,6 +22,7 @@ class creditScore(Page):
         self.data = data
         self.kwargs = kwargs
         self.modelBuilt = False
+        self.score = ['Poor','Standard','Good']
 
     def content(self):
         
@@ -56,7 +58,6 @@ class creditScore(Page):
         self.modelBuilt = True
         cleanData = self.data.drop(labels = ["Interest_Rate","Num_of_Loan","Delay_from_due_date", "Changed_Credit_Limit","Credit_Utilization_Ratio","Total_EMI_per_month","Amount_invested_monthly","Monthly_Balance","debtconsolidation","payday","notspecified","nodata","mortgage","credit-builder","auto","personal","homeequity","Credit_Score", "student"], axis = 1)
         #Defines what the outputs may be
-        self.score = ['Poor','Standard','Good']
 
         # Initialize the structured data classifier.
         clf = autokeras.StructuredDataClassifier(
@@ -76,10 +77,9 @@ class creditScore(Page):
         scoreModel = clf.export_model()
         scoreModel.save("score_model_autokeras", save_format = 'tf')
 
-        self.loaded_model = tensorflow.keras.models.load_model("score_model_autokeras", custom_objects=autokeras.CUSTOM_OBJECTS)
-
 
     def predict(self):
+        self.loaded_model = tensorflow.keras.models.load_model("score_model_autokeras", custom_objects=autokeras.CUSTOM_OBJECTS)
         # Make a prediction using the model. This returns a numeric integer output (e.g., 1)
         prediction = self.loaded_model.predict(self.inputValues)
         print('prediction', prediction)
