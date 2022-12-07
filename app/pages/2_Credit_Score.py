@@ -10,7 +10,7 @@ import pandas as pd
 import gradio as gr
 import math
 
-data = pd.read_csv("data/cleaner_cred_score_classifier")
+data = pd.read_csv("data/cleaner_cred_score_classifier.csv")
 data = data.drop_duplicates(subset="Customer_ID", keep = 'first', inplace=False)
 
 st.session_state.update(st.session_state)
@@ -104,6 +104,6 @@ page = creditScore(data, test = 'testing')
 page.title()
 page.content()
 page.input()
-page.buildModel()
+# page.buildModel() # can use pre-trained model after first use
 if page.buttonPressed:
     page.predict()

@@ -14,21 +14,7 @@ class Input_data(Page):
         
 
         "st.session_state object:", st.session_state
-        inputs = {
-            'Age': 23,
-            'Annual_Income': 50000,
-            'Num_Bank_Accounts': 1,
-            'Num_Credit_Card': 1,
-            'Num_of_Delayed_Payment': 1,
-            'Num_Credit_Inquiries': 1,
-            'Outstanding_Debt': 5000,
-            'Credit_History_Age': 200,
-            'Occupation': 'Scientist',
-            'prior_default': False,
-            'employed': False,
-            'Credit_Score': 0
-        }
-        st.session_state.update(inputs)
+        
         
         st.number_input("Age", min_value = 0, max_value = 100, step = 1, key = "Age")
         st.number_input("Annual Income", min_value = 0, max_value = 10000000, step = None, key = 'Annual_Income')

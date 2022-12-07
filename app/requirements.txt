@@ -1,6 +1,10 @@
-plotly-express==0.4.1
-streamlit==0.83.0
+autokeras
+gradio
+loguru
+matplotlib
+millify
+numpy
 pandas
-python-dotenv>=0.5.1
-loguru==0.5.3
-protobuf==3.20
+scikit-learn==0.23.2
+pycaret
+streamlit

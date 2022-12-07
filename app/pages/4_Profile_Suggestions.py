@@ -39,14 +39,9 @@ class Suggestions(Page):
     def content(self):
         """Returns the content of the page"""
         pt = pd.DataFrame({k:[v] for k,v in st.session_state.items()})
-        # st.table(pt)
-        # pt = self.data['base'].iloc[0]
-        print(pt)
+
         cand_suggest = self.model.get_suggestions(pt)
-        # print(cand_suggest)
         df = pd.DataFrame.from_records(cand_suggest,index=[0])
-        print(f"content: {df.columns}")
-        # st.table(df)
         i = 0
         difs = {}
         for col in list(df.columns):
@@ -76,6 +71,8 @@ class Suggestions(Page):
     def title(self):
         """Returns the title of the page"""
         st.header(f"Suggestions for Profile Improvement!")
+        st.markdown("Please scroll to find suggestions made by our model based on your inputs in the previous two pages. If you would like to see how an input changes the suggestions, please head to \"Fill Information\" page to input your new data!")
+
 
 if __name__ == '__main__':
     page = Suggestions()
