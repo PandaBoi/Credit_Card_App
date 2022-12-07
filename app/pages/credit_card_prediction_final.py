@@ -29,7 +29,7 @@ class CreditCardApp(Page):
         st.title(f"{self.name}")
         
     def content(self):
-        st.header("This is my page content")
+        #st.header("This is my page content")
         #st.write('cleaning data')
         testPage.cleanData()
         #st.write('about to convert data')
@@ -37,13 +37,13 @@ class CreditCardApp(Page):
         #st.write('requesting inputs')
         #testPage.buildModel()
         testPage.inputs()
+        #testPage.outputs()
     
     #def defineVariables(self):
         
     
     def inputs(self):
         print('starting inputs')
-        st.header('Inputs')
         st.header('Inputs')
         st.markdown('If the inputs are wrong, please go back to the fill information page')
         col11, col12, col13 = st.columns(3)
@@ -54,6 +54,12 @@ class CreditCardApp(Page):
         col21.metric('Are you employed?', st.session_state['employed'])
         col22.metric('Credit Score', st.session_state['Credit_Score'])
         col23.metric('Income', st.session_state['Annual_Income'])
+        #st.write('session state age', st.session_state['Age'])
+        #st.write('session state debt', st.session_state['Outstanding_Debt'])
+        #st.write('session state prior default', st.session_state['prior_default'])
+        #st.write('session state employed', st.session_state['employed'])
+        #st.write('session state credit score', st.session_state['Credit_Score'])
+        #st.write('session state income', st.session_state['Annual_Income'])
         pt = pd.DataFrame({k:[v] for k,v in st.session_state.items()})
         #print('credit score', pt['Credit_Score'])
         #st.write(pt)
@@ -91,7 +97,7 @@ class CreditCardApp(Page):
         #self.income = st.number_input('Income', min_value=0)
         self.calculate = st.button('Predict Application Outcome')
         if self.calculate:
-            print('calculating...')
+           # print('calculating...')
            # st.write('session state age', st.session_state['Age'])
            # st.write('session state debt', st.session_state['Outstanding_Debt'])
            # st.write('session state prior default', st.session_state['prior_default'])
@@ -103,6 +109,7 @@ class CreditCardApp(Page):
            
         
     def cleanData(self):
+        st.header('Cleaning your data...')
         #print('printing data')
        # print(self.data)
         tempData = self.data
@@ -154,6 +161,7 @@ class CreditCardApp(Page):
 
 
     def buildModel(self):
+        st.header('Building your model...')
         tempData = self.data
         #xData = tempData.drop(labels=["Approval Status"], axis=1)
         #yData = tempData["Approval Status"].to_frame()
@@ -198,8 +206,11 @@ class CreditCardApp(Page):
         elif outcome >= 0.5:
             out = 'Approved'   
             st.header('Congratulations! You are likely to be approved!')
+        #st.text_area('Application Prediction', out)
+        self.prediction = out
     
-    
+    #def outputs(self):
+        
 testPage = CreditCardApp(data, test='testing')
 
 #testPage.title()
