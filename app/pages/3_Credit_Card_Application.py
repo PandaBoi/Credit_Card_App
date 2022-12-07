@@ -176,13 +176,14 @@ class CreditCardApp(Page):
                          session_id=123,
                          normalize=True,
                          numeric_features=cat_cols,
-                         normalize_method='minmax'
+                         normalize_method='minmax',
+                         silent=True
                          )
 
         print('done setup')
         top1 = compare_models(n_select=1)
-        save_model(top1, "best_model.pkl")
-        self.applicationModel = load_model("best_model.pkl")
+        save_model(top1, "best_model")
+        self.applicationModel = load_model("best_model")
         #return applicationModel
     
     def predict(self):

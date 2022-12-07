@@ -60,11 +60,20 @@ def main():
     st.sidebar.title("Welcome to CredPred!!")
     st.title("Welcome to CredPred")
     st.subheader("Our product is focused on helping you navigate the credit card score/application journey.")
+    col1, col2, col3 = st.columns   ([1,1,1])
 
-    st.image(
+    with col1:
+        st.write("")
+
+    with col2:
+        st.image(
         "https://media.giphy.com/media/3o6Mb3OomPa9u6s7IY/giphy.gif",
         width=400
     )
+
+    with col3:
+        st.write("")
+    
 
     st.markdown(f"# Guide\n To make sure you get an awesome insight of your credit journey we have created an app that uses cutting-edge AI technology and huge oceans of data to provide you with quality insights!\n Navigate to these pages right away!:\n    1. **Fill Information** : use this page to input details about your profile that will be used to make suggestions and insights.\
     * **Credit Score** : Once your data is collected, this model \will run it through a ML model to provide you with your predicted credit score for your current profile!\
