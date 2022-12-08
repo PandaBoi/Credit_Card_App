@@ -78,11 +78,14 @@ def main():
     st.subheader("Improving your credit journey")
     st.markdown("**Introduction**")
 
-    st.markdown(f"To make sure you get an awesome insight of your credit journey we have created an app that uses cutting-edge AI technology and huge oceans of data to provide you with quality insights!\n Navigate to these pages right away!\n    \n * **Fill Information** : use this page to input details about your profile that will be used to make suggestions and insights.\
-    \n * **Credit Score**: Once your data is collected, this model will run it through a ML model to provide you with your predicted credit score for your current profile!\
-    \n * **Credit Card Application**: You would now want to check out how confident can you be, the next time you apply for a credit card. With a simple click you shall recieve your chances of success right away!!\
-    \n * **Suggestions**: Did your application fail to make it through? Fear not! Our app provides you with a way to deep-dive into what could be the potential reasons behind an application being rejected, simply slick on the Suggestions tab to explore the changes you could make on your profile to make your chances incease 10-folds instantly!*\n\n\n\
-    *T&C apply")
+    st.markdown(f"""
+    To make sure you get an awesome insight of your credit journey we have created an app that uses cutting-edge AI technology and huge oceans of data to provide you with quality insights!\n Navigate to these pages right away!\n 
+        \n * **Fill Information** : use this page to input details about your profile that will be used to make suggestions and insights.
+        \n * **Credit Score**: Once your data is collected, this model will run it through a ML model to provide you with your predicted credit score for your current profile!
+        \n * **Credit Card Application**: You would now want to check out how confident can you be, the next time you apply for a credit card. With a simple click you shall recieve your chances of success right away!!
+        \n * **Suggestions**: Did your application fail to make it through? Fear not! Our app provides you with a way to deep-dive into what could be the potential reasons behind an application being rejected, simply slick on the Suggestions tab to explore the changes you could make on your profile to make your chances incease 10-folds instantly!*\n\n\n\
+    *T&C apply
+    """)
 
 if __name__ == "__main__":
     main()
