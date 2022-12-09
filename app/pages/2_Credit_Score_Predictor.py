@@ -3,6 +3,8 @@ from utils.page import Page
 import numpy as np
 import autokeras
 import tensorflow
+tensorflow.config.experimental_run_functions_eagerly(True)
+
 import tensorflow.keras.models
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
@@ -79,7 +81,7 @@ class creditScore(Page):
 
 
     def predict(self):
-        self.loaded_model = tensorflow.keras.models.load_model("score_model_autokeras", custom_objects=autokeras.CUSTOM_OBJECTS)
+        self.loaded_model = tensorflow.keras.models.load_model("models/score_model_autokeras", custom_objects=autokeras.CUSTOM_OBJECTS)
         # Make a prediction using the model. This returns a numeric integer output (e.g., 1)
         prediction = self.loaded_model.predict(self.inputValues)
         print('prediction', prediction)

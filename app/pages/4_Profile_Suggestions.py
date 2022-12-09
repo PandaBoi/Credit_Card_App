@@ -62,6 +62,8 @@ class Suggestions(Page):
         ax.bar_label(bars)
         ax.set_yticks(list(range(len(difs.values()))), difs.keys())
         ax.set_xlim(-10,10)
+        ax.set_xlabel('xtimes change from current value')
+        ax.set_ylabel('Attribute')
         st.pyplot(fig)
 
 
