@@ -6,7 +6,6 @@ import tensorflow
 import tensorflow.keras.models
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-from models.creditScoreModel import creditScoreModel
 import pandas as pd
 import gradio as gr
 import math
