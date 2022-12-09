@@ -9,7 +9,14 @@ class Input_data(Page):
     
     
     def content(self):
-        """Returns the content of the page"""
+        """Saves user input fields in session state
+        
+        Inputs:
+            User inputs their information in the appropriate fields
+            
+        Ouputs:
+            Saves the user's information in the session state
+        """
 
         
         #Initializes the session state
