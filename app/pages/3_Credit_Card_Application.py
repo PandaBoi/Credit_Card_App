@@ -1,9 +1,7 @@
 import pandas as pd
 import streamlit as st
 from utils.page import Page
-#from pages.first_page import Input_data
 import numpy as np
-#import sklearn.datasets
 from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
 import os
@@ -12,7 +10,7 @@ import pycaret
 from pycaret.regression import *
 st.session_state.update(st.session_state)
 data = pd.read_csv('data/crx.data', header = None)
-#pressed = False
+
 class CreditCardApp(Page):
     def __init__(self, data, **kwargs):
         name = "Credit Card Prediction"
@@ -21,27 +19,18 @@ class CreditCardApp(Page):
         self.name = name
         self.data = data
         self.kwargs = kwargs
-        #self.buttonStatus = False
-        #st.title('Credit Card Application Predictor')
         
     def title(self):
-        #print('start')
         st.title(f"{self.name}")
         
+    #runs all page functions
     def content(self):
-        #st.header("This is my page content")
-        #st.write('cleaning data')
         testPage.cleanData()
-        #st.write('about to convert data')
         testPage.convertData()
-        #st.write('requesting inputs')
-        #testPage.buildModel()
         testPage.inputs()
-        #testPage.outputs()
     
-    #def defineVariables(self):
         
-    
+    #pulls all the inputs needed from the session state 
     def inputs(self):
         print('starting inputs')
         st.header('Inputs')
@@ -54,64 +43,30 @@ class CreditCardApp(Page):
         col21.metric('Are you employed?', st.session_state['employed'])
         col22.metric('Credit Score', st.session_state['Credit_Score'])
         col23.metric('Income', st.session_state['Annual_Income'])
-        #st.write('session state age', st.session_state['Age'])
-        #st.write('session state debt', st.session_state['Outstanding_Debt'])
-        #st.write('session state prior default', st.session_state['prior_default'])
-        #st.write('session state employed', st.session_state['employed'])
-        #st.write('session state credit score', st.session_state['Credit_Score'])
-        #st.write('session state income', st.session_state['Annual_Income'])
         pt = pd.DataFrame({k:[v] for k,v in st.session_state.items()})
-        #print('credit score', pt['Credit_Score'])
-        #st.write(pt)
-        #print('pt', pd)
-        #self.age = st.number_input('Age', min_value=0)
-       # self.age = st.session_state['Age']
         self.age = pt['Age'][0]
-        #self.debt = st.session_state['Outstanding_Debt']
         self.debt = pt['Outstanding_Debt'][0]
-        #self.creditScore = st.session_state['Credit_Score']
         self.creditScore = pt['Credit_Score'][0]
-        #self.income = st.session_state['Annual_Income']
         self.income = pt['Annual_Income'][0]
-        #priorD = st.session_state['prior_default']
         priorD = pt['prior_default'][0]
-        #emp = st.session_state['employed']
         emp = pt['employed'][0]
-        #self.age = Input_data.age
-        #self.debt = st.number_input('Debt', min_value=0)
-        #self.
-        #priorD = st.checkbox('Check if you have defaulted in the past')
         if priorD:
             self.priorDefault = 0
         else:
             self.priorDefault = 1
-        #emp = st.checkbox('Check if you are employed')
         if emp:
             self.employed = 0
         else:
             self.employed = 1
         inps = [self.age, self.debt, self.creditScore]
-        #print('inputs made')
-        #print('inputs', inps)
-        #self.creditScore = st.number_input('Credit Score', min_value=300, max_value=850)
-        #self.income = st.number_input('Income', min_value=0)
         self.calculate = st.button('Predict Application Outcome')
         if self.calculate:
-           # print('calculating...')
-           # st.write('session state age', st.session_state['Age'])
-           # st.write('session state debt', st.session_state['Outstanding_Debt'])
-           # st.write('session state prior default', st.session_state['prior_default'])
-           # st.write('session state employed', st.session_state['employed'])
-           # st.write('session state credit score', st.session_state['Credit_Score'])
-           # st.write('session state income', st.session_state['Annual_Income'])
             self.buildModel()
             self.predict()
            
-        
+    #cleans the raw data so that only the useful columns for the model are kept
     def cleanData(self):
         st.header('Cleaning your data...')
-        #print('printing data')
-       # print(self.data)
         tempData = self.data
         
         tempData.columns = ['Gender', 'Age', 'Debt', 'Married', 'Bank Customer', 'Education Level', 
@@ -122,7 +77,8 @@ class CreditCardApp(Page):
                                             'Ethnicity', 'Years Employed', 'Drivers License', 
                                             'Citizen', 'Zip Code'], axis = 1)
         self.data = cleanData
-       
+    
+    #converts the data into useable data
     def convertData(self):
         cleanData = self.data
         n = len(cleanData["Approval Status"])-1
@@ -159,15 +115,12 @@ class CreditCardApp(Page):
                 tempData['Credit Score'][n] = 300
         self.data = tempData
 
-
+    #builds the model using PyCaret
     def buildModel(self):
         st.header('Building your model...')
         tempData = self.data
-        #xData = tempData.drop(labels=["Approval Status"], axis=1)
-        #yData = tempData["Approval Status"].to_frame()
 
         tempData.drop(tempData.tail(1).index, inplace=True)
-        #yData.drop(yData.tail(1).index, inplace=True)
         cat_cols = ['Age', 'Debt', 'Prior Default',
                     'Employed', 'Credit Score', 'Income']
         print('before settings')
@@ -184,12 +137,10 @@ class CreditCardApp(Page):
         top1 = compare_models(n_select=1)
         save_model(top1, "best_model")
         self.applicationModel = load_model("best_model")
-        #return applicationModel
     
+    #uses model that was build to predict the outcome of the application
     def predict(self):
-        
         inputList = [self.age, self.debt, self.priorDefault, self.employed, self.creditScore, self.income]
-        
         d = {'Age': [self.age], 'Debt': [self.debt], 'Prior Default': [self.priorDefault], 'Employed': [self.employed],
              'Credit Score': [self.creditScore], 'Income': [self.income]}
         print('d', d)
@@ -197,30 +148,17 @@ class CreditCardApp(Page):
         print('testData', testData)
         prediction = predict_model(self.applicationModel, testData)
         outcome = prediction["Label"][0]
-        #print("test data", testData)
         print('dataFrame Made')
         print('outcome', outcome)
-        #prediction = predict_model(applicationModel, testData)
         if outcome < 0.5:
             out = 'Not Approved'
             st.header('You are unlikely to be approved. Check suggestions page for recommendations')
         elif outcome >= 0.5:
             out = 'Approved'   
             st.header('Congratulations! You are likely to be approved!')
-        #st.text_area('Application Prediction', out)
         self.prediction = out
     
-    #def outputs(self):
         
 testPage = CreditCardApp(data, test='testing')
 
-#testPage.title()
-#testPage.content()
-#testPage.cleanData()
-#testPage.convertData()
-#testPage.buildModel()
-#testPage.inputs()
-#applicationModel = testPage.buildModel()
-#testPage.predict()
-#if __name__ == '__main__':
 testPage()
