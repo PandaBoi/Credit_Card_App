@@ -1,5 +1,8 @@
 # Welcome to CredPred!
 
+<p align="center">
+  <img width="460" height="300" src="credpred.png">
+</p>
 CredPred is an app created to help users on their credit journey. It is a simple light-weight interface to get instant estimates of how likely is you profile to succeed in a credit card application. It also provides you with insights into improving your profile to continue on your credit journey being more informed and confident!
 
 
