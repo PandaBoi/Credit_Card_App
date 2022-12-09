@@ -12,9 +12,10 @@ class Input_data(Page):
         """Returns the content of the page"""
 
         
-
+        #Initializes the session state
         "st.session_state object:", st.session_state
         
+        #Initializes the user input fields that are subsequently used in the next pages
         
         st.number_input("Age", min_value = 0, max_value = 100, step = 1, key = "Age")
         st.number_input("Annual Income", min_value = 0, max_value = 10000000, step = None, key = 'Annual_Income')
@@ -33,21 +34,7 @@ class Input_data(Page):
         st.checkbox("Are you employed ?", key = 'employed')
         st.number_input("Credit Score", min_value = 0, max_value = 800, step = 1, key = 'Credit_Score')
 
-        # st.write(st.session_state.age)
-        # st.write(st.session_state.income)
-        # st.write(st.session_state.bank_accounts)
-        # st.write(st.session_state.credit_cards)
-        # st.write(st.session_state.delayed)
-        # st.write(st.session_state.inquiries)
-        # st.write(st.session_state.debt)
-        # st.write(st.session_state.credit_history)
-        # st.write(st.session_state.occupation)
-        # st.write(st.session_state.prior_default)
-        # st.write(int(st.session_state.employed))
-        # st.write(st.session_state.credit_score)
-
-        # st.write(st.session_state.debt_2)
-        
+        #Once the user has input their data, the session state is automatically updated
 
     def title(self):
         """Returns the title of the page"""
