@@ -33,15 +33,21 @@ div[data-testid="metric-container"] > label[data-testid="stMetricLabel"] > div {
 class Suggestions(Page):
     def __init__(self, **kwargs):
         self.kwargs = kwargs
-        # self.train_data = pd.read_csv("app/data/clean_train.csv")
         self.model = SuggestionModel(data_path="data/cleaner_cred_score_classificaiton.csv")
 
     def content(self):
         """Returns the content of the page"""
+
+        # convert session state to dataframe
         pt = pd.DataFrame({k:[v] for k,v in st.session_state.items()})
 
+        # retreive suggestions from model
         cand_suggest = self.model.get_suggestions(pt)
+
+        # convert suggestions to dataframe
         df = pd.DataFrame.from_records(cand_suggest,index=[0])
+        
+        # display suggestions in metrics
         i = 0
         difs = {}
         for col in list(df.columns):
@@ -55,6 +61,7 @@ class Suggestions(Page):
             i += 1
             i %= 3
         
+        # display suggestions in plot
         difs.pop('Age')
         fig, ax = plt.subplots()
         colors = ['r' if difs[k] < 0 else 'g' for k in difs.keys()]

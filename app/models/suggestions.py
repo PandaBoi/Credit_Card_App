@@ -21,7 +21,7 @@ class SuggestionModel():
 
   def _load_model(self):
     if self.model_path and os.path.exists(self.model_path):
-      self.model = load_model(self.model_path)
+      self.model = load_model(self.model_path) # this is not used, incase a model is added, this could be useful
 
   def _load_data(self):
     if self.data_path and os.path.exists(self.data_path):
@@ -30,6 +30,12 @@ class SuggestionModel():
         raise EOFError("cannot load data")
 
   def _filter_users(self, fixed_attribs):
+    '''
+    Filter users from the entire corpus based on `fixed_attribs`
+
+    Returns:
+      selected_data [Dataframe]: dataframe of users who pass through the filter
+    '''
     selected_data = self.data[self.data['Credit_Score']=='Good']
     for attrib, val in fixed_attribs.items():
         if selected_data is None:
@@ -40,7 +46,15 @@ class SuggestionModel():
     return selected_data
 
   def _get_topk_cands(self, inpt):
+    '''
+    Provides the top-k candidate profiles which are "closest" to the input
+    user profile.
 
+    Args:
+      inpt [Dataframe]: input user profile
+    Returns:
+      top-k candidates
+    '''
     filtered_cands = self._filter_users(fixed_attribs={
         'Age': inpt['Age'].values[0],
         inpt['Occupation'].values[0]: 1
@@ -73,7 +87,14 @@ class SuggestionModel():
         raise
 
   def get_suggestions(self, inpt):
+    '''
+    Call this function to receive the suggestions as a dictionary
 
+    Args:
+      inpt [Dataframe]: user input profile as a Dataframe
+    Returns:
+      float_suggestions [Dict]: dictionary of all suggestions created
+    '''
     topk_cands = self._get_topk_cands(inpt)
     topk_cands = topk_cands[[col for col in topk_cands.columns if col in inpt.columns]]
     float_cols = topk_cands.select_dtypes(include=[float]).mean(axis=0)
