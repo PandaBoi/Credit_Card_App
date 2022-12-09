@@ -51,8 +51,8 @@ This course is completed as a requirement for the course Designing and Deploying
 
 ## Contacts
 
-Zoe Magnelia: zmagneli@andrew.cmu.edu
-Marianna Anagnostou: managnos@andrew.cmu.edu
-Matthew Nagler: mnagler@andrew.cmu.edu
-Rohan Panda: rohanpan@andrew.cmu.edu
+* Zoe Magnelia: zmagneli@andrew.cmu.edu
+* Marianna Anagnostou: managnos@andrew.cmu.edu
+* Matthew Nagler: mnagler@andrew.cmu.edu
+* Rohan Panda: rohanpan@andrew.cmu.edu
 
