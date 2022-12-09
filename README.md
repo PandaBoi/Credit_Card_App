@@ -48,3 +48,11 @@ Currently the application partially works on MacOS systems. The root of failure 
 
 This course is completed as a requirement for the course Designing and Deploying AI/ML systems (course info [here](https://www.coursicle.com/cmu/courses/MEG/24679/))
 
+
+## Contacts
+
+Zoe Magnelia: zmagneli@andrew.cmu.edu
+Marianna Anagnostou: managnos@andrew.cmu.edu
+Matthew Nagler: mnagler@andrew.cmu.edu
+Rohan Panda: rohanpan@andrew.cmu.edu
+
